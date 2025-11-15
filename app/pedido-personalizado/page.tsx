@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/navigation"
 import { format } from "date-fns"
 import { es } from "date-fns/locale"
-import { CalendarIcon, Cake } from "lucide-react"
+import { CalendarIcon, Cake, PlusCircle, Trash2 } from "lucide-react"
 import { InteractiveBackground } from "@/components/interactive-background"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
@@ -20,6 +20,11 @@ import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { fetchProducts, createOrder, type Product } from "@/lib/api"
 import { getAuthToken } from "@/lib/auth"
+
+type OrderItemForm = {
+  productId: string
+  quantity: number
+}
 
 export default function PedidoPersonalizadoPage() {
   const router = useRouter()
@@ -35,7 +40,7 @@ export default function PedidoPersonalizadoPage() {
   const [alergias, setAlergias] = useState("")
   const [comentarios, setComentarios] = useState("")
   const [tamano, setTamano] = useState("")
-  const [selectedProductId, setSelectedProductId] = useState<string>("")
+  const [orderItems, setOrderItems] = useState<OrderItemForm[]>([{ productId: "", quantity: 1 }])
 
   const [productos, setProductos] = useState<Product[]>([])
   const [isLoadingProductos, setIsLoadingProductos] = useState(true)
@@ -46,9 +51,17 @@ export default function PedidoPersonalizadoPage() {
       .then((items) => {
         if (!isMounted) return
         setProductos(items)
-        if (items.length > 0) {
-          setSelectedProductId(String(items[0].id))
-        }
+        setOrderItems((current) => {
+          if (current.some((item) => item.productId)) {
+            return current
+          }
+          if (items.length === 0) {
+            return current
+          }
+          return current.map((item, index) =>
+            index === 0 ? { ...item, productId: String(items[0].id) } : item,
+          )
+        })
       })
       .catch(() => {
         if (isMounted) {
@@ -65,20 +78,65 @@ export default function PedidoPersonalizadoPage() {
     }
   }, [])
 
-  const productoSeleccionado = useMemo(
-    () => productos.find((producto) => String(producto.id) === selectedProductId),
-    [productos, selectedProductId],
+  const orderItemsWithDetails = useMemo(
+    () =>
+      orderItems.map((item) => ({
+        ...item,
+        product: productos.find((producto) => String(producto.id) === item.productId),
+      })),
+    [orderItems, productos],
   )
+
+  const totalEstimado = useMemo(
+    () =>
+      orderItemsWithDetails.reduce((total, item) => {
+        if (!item.product) {
+          return total
+        }
+        const price = Number(item.product.price) || 0
+        return total + price * item.quantity
+      }, 0),
+    [orderItemsWithDetails],
+  )
+
+  const handleOrderItemChange = (index: number, changes: Partial<OrderItemForm>) => {
+    setOrderItems((current) =>
+      current.map((item, itemIndex) => (itemIndex === index ? { ...item, ...changes } : item)),
+    )
+  }
+
+  const handleAddOrderItem = () => {
+    setOrderItems((current) => [
+      ...current,
+      {
+        productId: productos[0] ? String(productos[0].id) : "",
+        quantity: 1,
+      },
+    ])
+  }
+
+  const handleRemoveOrderItem = (index: number) => {
+    setOrderItems((current) => current.filter((_, itemIndex) => itemIndex !== index))
+  }
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
-    if (!selectedProductId) {
-      setError("Selecciona un producto para continuar.")
-      return
-    }
 
     if (!tamano) {
       setError("Selecciona un tamano para tu pedido.")
+      return
+    }
+
+    const preparedItems = orderItems
+      .filter((item) => item.productId && item.quantity > 0)
+      .map((item) => ({
+        product: Number(item.productId),
+        quantity: item.quantity,
+        personalization: decoracion || undefined,
+      }))
+
+    if (preparedItems.length === 0) {
+      setError("Agrega al menos un producto con cantidad valida.")
       return
     }
 
@@ -110,13 +168,7 @@ export default function PedidoPersonalizadoPage() {
       await createOrder(token, {
         delivery_date: date ? format(date, "yyyy-MM-dd") : null,
         notes: resumen,
-        items: [
-          {
-            product: Number(selectedProductId),
-            quantity: 1,
-            personalization: decoracion || undefined,
-          },
-        ],
+        items: preparedItems,
       })
 
       setIsSubmitted(true)
@@ -231,25 +283,77 @@ export default function PedidoPersonalizadoPage() {
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-foreground">Detalles del pastel</h3>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="sabor">Sabor / producto *</Label>
-                      <Select
-                        value={selectedProductId}
-                        onValueChange={setSelectedProductId}
+                  <div className="space-y-6">
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <Label>Productos *</Label>
+                        <p className="text-sm text-muted-foreground">
+                          Agrega todos los panes o pasteles que quieres incluir en tu pedido.
+                        </p>
+                      </div>
+                      <div className="space-y-4">
+                        {orderItems.map((item, index) => (
+                          <div
+                            key={`${item.productId}-${index}`}
+                            className="flex flex-col gap-4 rounded-lg border p-4 sm:flex-row sm:items-end"
+                          >
+                            <div className="flex-1 space-y-2">
+                              <Label htmlFor={`producto-${index}`}>Producto #{index + 1}</Label>
+                              <Select
+                                value={item.productId}
+                                onValueChange={(value) => handleOrderItemChange(index, { productId: value })}
+                                disabled={isLoadingProductos || productos.length === 0}
+                              >
+                                <SelectTrigger id={`producto-${index}`}>
+                                  <SelectValue placeholder="Selecciona un producto" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {productos.map((producto) => (
+                                    <SelectItem key={producto.id} value={String(producto.id)}>
+                                      {producto.name}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                            <div className="w-full space-y-2 sm:w-32">
+                              <Label htmlFor={`cantidad-${index}`}>Cantidad</Label>
+                              <Input
+                                id={`cantidad-${index}`}
+                                type="number"
+                                min={1}
+                                value={String(item.quantity)}
+                                onChange={(event) =>
+                                  handleOrderItemChange(index, {
+                                    quantity: Math.max(1, Number(event.target.value) || 1),
+                                  })
+                                }
+                              />
+                            </div>
+                            {orderItems.length > 1 && (
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                className="self-start text-destructive hover:text-destructive"
+                                onClick={() => handleRemoveOrderItem(index)}
+                              >
+                                <Trash2 className="h-5 w-5" />
+                                <span className="sr-only">Quitar producto</span>
+                              </Button>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handleAddOrderItem}
                         disabled={isLoadingProductos || productos.length === 0}
+                        className="w-full sm:w-auto"
                       >
-                        <SelectTrigger id="sabor">
-                          <SelectValue placeholder="Selecciona un producto" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {productos.map((producto) => (
-                            <SelectItem key={producto.id} value={String(producto.id)}>
-                              {producto.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                        <PlusCircle className="mr-2 h-4 w-4" />
+                        Agregar otro producto
+                      </Button>
                       {!isLoadingProductos && productos.length === 0 && (
                         <p className="text-sm text-muted-foreground">
                           No hay productos disponibles. Crea productos desde el panel de administracion.
@@ -335,10 +439,22 @@ export default function PedidoPersonalizadoPage() {
                     />
                   </div>
 
-                  {productoSeleccionado && (
-                    <p className="text-sm text-muted-foreground">
-                      Precio estimado: ${productoSeleccionado.price}
-                    </p>
+                  {orderItemsWithDetails.some((item) => item.product) && (
+                    <div className="rounded-md bg-muted/60 p-4 text-sm text-muted-foreground space-y-2">
+                      <p className="font-medium text-foreground">Resumen del pedido:</p>
+                      <ul className="list-disc space-y-1 pl-5">
+                        {orderItemsWithDetails.map((item, index) =>
+                          item.product ? (
+                            <li key={`${item.product.id}-${index}`}>
+                              {item.quantity}x {item.product.name}
+                            </li>
+                          ) : null,
+                        )}
+                      </ul>
+                      {totalEstimado > 0 && (
+                        <p className="font-semibold text-foreground">Total estimado: ${totalEstimado.toFixed(2)}</p>
+                      )}
+                    </div>
                   )}
                 </div>
 
