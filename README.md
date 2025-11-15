@@ -91,16 +91,9 @@ Puedes crear más usuarios desde `/admin/`, mediante `python manage.py createsup
 
 ## Datos iniciales
 
-- Se cargan 30 productos (pasteles y pan dulce) en la tabla `api_product`.
+- El backend ejecuta `python manage.py seed_products` después de las migraciones: si la tabla `api_product` está vacía, carga automáticamente 30 productos desde `backend/api/fixtures/initial_products.json`.
 - Para verificar: `http://localhost:8000/api/products/` (GET) o desde el admin.
-
-Si necesitas regenerarlos:
-
-```bash
-docker compose exec backend python manage.py shell
-```
-
-Ejecuta el script en `README.md` (secciones anteriores) o crea los tuyos manualmente.
+- Si deseas personalizar el catálogo inicial, edita la fixture y vuelve a levantar el backend (`docker compose up -d backend`). También puedes ejecutar `docker compose exec backend python manage.py seed_products` de forma manual si borraste los datos.
 
 ---
 

@@ -1,0 +1,393 @@
+[
+{
+  "model": "api.product",
+  "pk": 1,
+  "fields": {
+    "name": "Pastel Chocolate",
+    "description": "",
+    "price": "250.00",
+    "stock": 10,
+    "image": "",
+    "created_at": "2025-10-26T14:00:39.628Z",
+    "updated_at": "2025-10-26T14:00:39.628Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 2,
+  "fields": {
+    "name": "Pastel Chocolate Premium",
+    "description": "Pastel de chocolate con ganache",
+    "price": "250.00",
+    "stock": 10,
+    "image": "https://example.com/chocolate.jpg",
+    "created_at": "2025-10-26T14:14:46.255Z",
+    "updated_at": "2025-10-26T14:14:46.255Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 3,
+  "fields": {
+    "name": "Pastel Tres Leches",
+    "description": "Tradicional tres leches",
+    "price": "220.00",
+    "stock": 8,
+    "image": "https://example.com/tresleches.jpg",
+    "created_at": "2025-10-26T14:14:46.258Z",
+    "updated_at": "2025-10-26T14:14:46.258Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 4,
+  "fields": {
+    "name": "Cupcakes Vainilla",
+    "description": "Docena de cupcakes de vainilla",
+    "price": "180.00",
+    "stock": 15,
+    "image": "https://example.com/cupcakes.jpg",
+    "created_at": "2025-10-26T14:14:46.261Z",
+    "updated_at": "2025-10-26T14:14:46.261Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 5,
+  "fields": {
+    "name": "Pastel de Chocolate Premium",
+    "description": "Delicioso pastel de chocolate con ganache y decoracion elegante",
+    "price": "450.00",
+    "stock": 50,
+    "image": "/chocolate-ganache-cake.png",
+    "created_at": "2025-10-26T14:27:52.026Z",
+    "updated_at": "2025-10-26T14:27:52.026Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 6,
+  "fields": {
+    "name": "Pastel de Vainilla Clasico",
+    "description": "Suave pastel de vainilla con crema de mantequilla",
+    "price": "380.00",
+    "stock": 50,
+    "image": "/vanilla-cake.png",
+    "created_at": "2025-10-26T14:27:52.034Z",
+    "updated_at": "2025-10-26T14:27:52.034Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 7,
+  "fields": {
+    "name": "Pastel Red Velvet",
+    "description": "Pastel aterciopelado con frosting de queso crema",
+    "price": "420.00",
+    "stock": 50,
+    "image": "/red-velvet-cake.png",
+    "created_at": "2025-10-26T14:27:52.037Z",
+    "updated_at": "2025-10-26T14:27:52.037Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 8,
+  "fields": {
+    "name": "Pastel de Zanahoria",
+    "description": "Pastel humedo de zanahoria con nueces y especias",
+    "price": "400.00",
+    "stock": 50,
+    "image": "/moist-carrot-cake-with-cream-cheese-frosting-walnu.jpg",
+    "created_at": "2025-10-26T14:27:52.041Z",
+    "updated_at": "2025-10-26T14:27:52.041Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 9,
+  "fields": {
+    "name": "Pastel de Tres Leches",
+    "description": "Tradicional pastel empapado en tres tipos de leche",
+    "price": "350.00",
+    "stock": 50,
+    "image": "/traditional-tres-leches-cake-soaked-in-three-milks.jpg",
+    "created_at": "2025-10-26T14:27:52.044Z",
+    "updated_at": "2025-10-26T14:27:52.044Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 10,
+  "fields": {
+    "name": "Pastel de Fresas",
+    "description": "Pastel ligero con fresas frescas y crema chantilly",
+    "price": "480.00",
+    "stock": 50,
+    "image": "/light-strawberry-cake-with-fresh-strawberries-and-.jpg",
+    "created_at": "2025-10-26T14:27:52.050Z",
+    "updated_at": "2025-10-26T14:27:52.050Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 11,
+  "fields": {
+    "name": "Concha",
+    "description": "Pan dulce tradicional con costra de azucar",
+    "price": "15.00",
+    "stock": 50,
+    "image": "/concha.jpg",
+    "created_at": "2025-10-26T14:27:52.052Z",
+    "updated_at": "2025-10-26T14:27:52.052Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 12,
+  "fields": {
+    "name": "Cuerno",
+    "description": "Pan hojaldrado en forma de cuerno",
+    "price": "18.00",
+    "stock": 50,
+    "image": "/cuerno.jpg",
+    "created_at": "2025-10-26T14:27:52.056Z",
+    "updated_at": "2025-10-26T14:27:52.056Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 13,
+  "fields": {
+    "name": "Pan de Muerto",
+    "description": "Pan tradicional de Dia de Muertos con aroma de azahar",
+    "price": "45.00",
+    "stock": 50,
+    "image": "/pan-de-muerto.jpg",
+    "created_at": "2025-10-26T14:27:52.059Z",
+    "updated_at": "2025-10-26T14:27:52.059Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 14,
+  "fields": {
+    "name": "Rosca de Reyes",
+    "description": "Rosca tradicional de Reyes con frutas cristalizadas",
+    "price": "280.00",
+    "stock": 50,
+    "image": "/rosca-de-reyes.jpg",
+    "created_at": "2025-10-26T14:27:52.063Z",
+    "updated_at": "2025-10-26T14:27:52.063Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 15,
+  "fields": {
+    "name": "Oreja",
+    "description": "Pan hojaldrado crujiente con azucar",
+    "price": "16.00",
+    "stock": 50,
+    "image": "/oreja.jpg",
+    "created_at": "2025-10-26T14:27:52.065Z",
+    "updated_at": "2025-10-26T14:27:52.065Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 16,
+  "fields": {
+    "name": "Cocol",
+    "description": "Pan tradicional con piloncillo y anis",
+    "price": "12.00",
+    "stock": 50,
+    "image": "/cocol.jpg",
+    "created_at": "2025-10-26T14:27:52.070Z",
+    "updated_at": "2025-10-26T14:27:52.070Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 17,
+  "fields": {
+    "name": "Bisquet",
+    "description": "Pan suave y esponjoso ideal para el desayuno",
+    "price": "10.00",
+    "stock": 50,
+    "image": "/bisquet.jpg",
+    "created_at": "2025-10-26T14:27:52.073Z",
+    "updated_at": "2025-10-26T14:27:52.073Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 18,
+  "fields": {
+    "name": "Galleta de Gragea",
+    "description": "Galleta decorada con grageas de colores",
+    "price": "14.00",
+    "stock": 50,
+    "image": "/galleta-gragea.jpg",
+    "created_at": "2025-10-26T14:27:52.078Z",
+    "updated_at": "2025-10-26T14:27:52.078Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 19,
+  "fields": {
+    "name": "Campechana",
+    "description": "Pan dulce con costra de chocolate y vainilla",
+    "price": "16.00",
+    "stock": 50,
+    "image": "/campechana.jpg",
+    "created_at": "2025-10-26T14:27:52.081Z",
+    "updated_at": "2025-10-26T14:27:52.081Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 20,
+  "fields": {
+    "name": "Chilindrina",
+    "description": "Pan dulce crujiente con azucar",
+    "price": "13.00",
+    "stock": 50,
+    "image": "/chilindrina.jpg",
+    "created_at": "2025-10-26T14:27:52.085Z",
+    "updated_at": "2025-10-26T14:27:52.085Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 21,
+  "fields": {
+    "name": "Bigote",
+    "description": "Pan dulce en forma de bigote con azucar",
+    "price": "15.00",
+    "stock": 50,
+    "image": "/bigote.jpg",
+    "created_at": "2025-10-26T14:27:52.087Z",
+    "updated_at": "2025-10-26T14:27:52.087Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 22,
+  "fields": {
+    "name": "Mantecada",
+    "description": "Panque individual esponjoso y dulce",
+    "price": "12.00",
+    "stock": 50,
+    "image": "/mantecada.jpg",
+    "created_at": "2025-10-26T14:27:52.091Z",
+    "updated_at": "2025-10-26T14:27:52.091Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 23,
+  "fields": {
+    "name": "Dona",
+    "description": "Dona glaseada suave y esponjosa",
+    "price": "18.00",
+    "stock": 50,
+    "image": "/dona.jpg",
+    "created_at": "2025-10-26T14:27:52.094Z",
+    "updated_at": "2025-10-26T14:27:52.094Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 24,
+  "fields": {
+    "name": "Piedra",
+    "description": "Pan dulce redondo con costra crujiente",
+    "price": "14.00",
+    "stock": 50,
+    "image": "/piedra.jpg",
+    "created_at": "2025-10-26T14:27:52.098Z",
+    "updated_at": "2025-10-26T14:27:52.098Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 25,
+  "fields": {
+    "name": "Rebanada",
+    "description": "Pan dulce rectangular con costra de azucar",
+    "price": "16.00",
+    "stock": 50,
+    "image": "/rebanada.jpg",
+    "created_at": "2025-10-26T14:27:52.100Z",
+    "updated_at": "2025-10-26T14:27:52.100Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 26,
+  "fields": {
+    "name": "Mono",
+    "description": "Pan dulce en forma de lazo con azucar",
+    "price": "15.00",
+    "stock": 50,
+    "image": "/mono.jpg",
+    "created_at": "2025-10-26T14:27:52.103Z",
+    "updated_at": "2025-10-26T14:27:52.103Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 27,
+  "fields": {
+    "name": "Novia",
+    "description": "Pan dulce alargado con costra blanca",
+    "price": "17.00",
+    "stock": 50,
+    "image": "/novia.jpg",
+    "created_at": "2025-10-26T14:27:52.106Z",
+    "updated_at": "2025-10-26T14:27:52.106Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 28,
+  "fields": {
+    "name": "Churro",
+    "description": "Churro crujiente con azucar y canela",
+    "price": "20.00",
+    "stock": 50,
+    "image": "/churro.jpg",
+    "created_at": "2025-10-26T14:27:52.109Z",
+    "updated_at": "2025-10-26T14:27:52.109Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 29,
+  "fields": {
+    "name": "Empanada",
+    "description": "Empanada de frutas o cajeta",
+    "price": "22.00",
+    "stock": 50,
+    "image": "/empanada.jpg",
+    "created_at": "2025-10-26T14:27:52.112Z",
+    "updated_at": "2025-10-26T14:27:52.112Z"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 30,
+  "fields": {
+    "name": "Pan de Nata",
+    "description": "Pan suave con nata fresca",
+    "price": "19.00",
+    "stock": 50,
+    "image": "/pan-de-nata.jpg",
+    "created_at": "2025-10-26T14:27:52.114Z",
+    "updated_at": "2025-10-26T14:27:52.114Z"
+  }
+}
+]
+
