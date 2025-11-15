@@ -26,7 +26,8 @@ Aplicación full-stack para gestionar pedidos de una pastelería: frontend en Ne
 
    - `backend/.env`
      - `DATABASE_URL` (si usarás otro Postgres)
-     - `NTFY_TOPIC`, `NTFY_TOKEN` según tu suscripción ntfy
+     - `DJANGO_SUPERUSER_EMAIL`, `DJANGO_SUPERUSER_USERNAME`, `DJANGO_SUPERUSER_PASSWORD`
+      - `NTFY_TOPIC`, `NTFY_TOKEN` según tu suscripción ntfy
    - `.env.local`
      - `NEXT_PUBLIC_API_URL=http://localhost:8000/api` (para desarrollo local)
 
@@ -77,12 +78,14 @@ Para ver logs:
 
 ## Usuarios por defecto
 
-| Rol          | Usuario / Email            | Contraseña  | Notas                        |
-|--------------|----------------------------|-------------|------------------------------|
-| Superusuario | `admin` (`admin@example.com`) | `Admin123!` | Accede al panel `/admin/`    |
-| Cliente demo | `cliente2@example.com`     | `Cliente123!` | Puede crear pedidos desde la web |
+El contenedor del backend crea automáticamente un superusuario al iniciar después de las migraciones, usando las variables `DJANGO_SUPERUSER_*` del archivo `backend/.env` (por defecto `admin@example.com` / `Admin123!`). Cambia esos valores antes de ejecutar `docker compose up` si necesitas credenciales distintas.
 
-Puedes crear más usuarios desde `/admin/` o mediante los endpoints de autenticación (`/api/auth/register/`, `/api/auth/login/`).
+| Rol          | Usuario / Email              | Contraseña    | Notas                        |
+|--------------|------------------------------|---------------|------------------------------|
+| Superusuario | `admin` (`admin@example.com`) | `Admin123!`   | Accede al panel `/admin/`    |
+| Cliente demo | `cliente2@example.com`       | `Cliente123!` | Puede crear pedidos desde la web |
+
+Puedes crear más usuarios desde `/admin/`, mediante `python manage.py createsuperuser` o usando los endpoints de autenticación (`/api/auth/register/`, `/api/auth/login/`).
 
 ---
 
