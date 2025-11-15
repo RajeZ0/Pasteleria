@@ -16,9 +16,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files
-.env*
-backend/.env
+# env files (tracked intentionally, so no ignore rules)
 
 # vercel
 .vercel
